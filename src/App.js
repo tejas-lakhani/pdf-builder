@@ -1,34 +1,28 @@
-import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import { useRef, useState, useEffect } from "react";
+import Drop from "./Drop";
 import { Document, Page, pdfjs } from "react-pdf";
-// import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-// import "react-pdf/dist/esm/Page/TextLayer.css";
-import {
-  deletePdfForTemplate,
-  getPdfForTemplate,
-  savePdfForTemplate,
-} from "./utils/db";
-import { blobToURL } from "./utils/Utils";
-import dayjs from "dayjs";
 import { PDFDocument, rgb } from "pdf-lib";
-import { Header } from "./components/Header";
-import { AddSigDialog } from "./components/AddSigDialog";
-import Drop from "./components/Drop";
-import { BigButton } from "./components/BigButton";
-import DraggableBox from "./components/DraggableBox";
-import DraggableText from "./components/DraggableText";
-import DraggableSignature from "./components/DraggableSignature";
+import { blobToURL } from "./utils/Utils";
+import {
+  savePdfForTemplate,
+  getPdfForTemplate,
+  deletePdfForTemplate,
+} from "./utils/db";
 import PagingControl from "./components/PagingControl";
+import { AddSigDialog } from "./components/AddSigDialog";
+import { Header } from "./Header";
+import { BigButton } from "./components/BigButton";
 import { Modal } from "./components/Modal";
-import { primary45 } from "./utils/colors";
+import DraggableSignature from "./components/DraggableSignature";
+import DraggableText from "./components/DraggableText";
+import DraggableBox from "./components/DraggableBox";
+import Sidebar from "./components/Sidebar";
+import FieldPanel from "./components/FieldPanel";
+import { primary45, errorColor } from "./utils/colors";
+import dayjs from "dayjs";
 
-// Set the worker source for PDF.js
-pdfjs.GlobalWorkerOptions.workerSrc = `${process.env.PUBLIC_URL}/pdfjs/pdf.worker.min.js`;
-console.log(
-  "PDF.js worker source set to:",
-  pdfjs.GlobalWorkerOptions.workerSrc
-);
-console.log("PDF.js version:", pdfjs.version);
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function downloadURI(uri, name) {
   var link = document.createElement("a");
@@ -1366,15 +1360,7 @@ function App() {
                 <Document
                   file={pdf}
                   onLoadSuccess={(data) => {
-                    console.log("PDF loaded successfully:", data);
                     setTotalPages(data.numPages);
-                  }}
-                  onLoadError={(error) => {
-                    console.error("PDF loading error:", error);
-                    console.log("PDF file object:", pdf);
-                    alert(
-                      "Failed to load PDF file. Please check if the file is valid and try again."
-                    );
                   }}
                 >
                   <Page
@@ -1383,12 +1369,6 @@ function App() {
                     height={1200}
                     onLoadSuccess={(data) => {
                       setPageDetails(data);
-                    }}
-                    onLoadError={(error) => {
-                      console.error("Page loading error:", error);
-                      alert(
-                        "Failed to load PDF page. Please check if the file is valid and try again."
-                      );
                     }}
                   />
                 </Document>

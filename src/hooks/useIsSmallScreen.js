@@ -1,4 +1,4 @@
-import { useWindowSize } from "./useWindowSize";
+import {useWindowSize} from './useWindowSize';
 
 export function useIsSmallScreen() {
   const windowSize = useWindowSize();

@@ -1,5 +1,5 @@
 import Draggable from "react-draggable";
-// import { FaCheck, FaTimes } from "react-icons/fa";
+import { FaCheck, FaTimes } from "react-icons/fa";
 import { cleanBorder, errorColor, goodColor, primary45 } from "../utils/colors";
 import { useState, useEffect, useRef } from "react";
 
@@ -54,10 +54,10 @@ export default function DraggableText({
       <div ref={innerRef} style={styles.container}>
         <div style={styles.controls}>
           <div style={styles.smallButton} onClick={() => onSet(text)}>
-            {/* <FaCheck color={goodColor} /> */}
+            <FaCheck color={goodColor} />
           </div>
           <div style={styles.smallButton} onClick={onCancel}>
-            {/* <FaTimes color={errorColor} /> */}
+            <FaTimes color={errorColor} />
           </div>
         </div>
         <input

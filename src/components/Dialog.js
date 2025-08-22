@@ -1,6 +1,6 @@
 import React from "react";
 import { primary45 } from "../utils/colors";
-// import { FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { Modal } from "./Modal";
 
 export function Dialog({
@@ -46,13 +46,13 @@ export function Dialog({
       <div style={styles.container}>
         <div style={styles.header}>
           <div>{title}</div>
-          {/* <FaTimes
+          <FaTimes
             color={"#FFF"}
             size={16}
             style={styles.xIcon}
             className={"dialogClose"}
             onClick={onClose}
-          /> */}
+          />
         </div>
         <div style={styles.body}>{body}</div>
       </div>
